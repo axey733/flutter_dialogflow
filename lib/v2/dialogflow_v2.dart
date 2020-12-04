@@ -114,22 +114,28 @@ class Dialogflow {
   final String payload;
   final bool resetContexts;
 
-  const Dialogflow({@required this.authGoogle, this.language="en", this.payload="", this.resetContexts=false});
+  const Dialogflow(
+      {@required this.authGoogle,
+      this.language = "en",
+      this.payload = "",
+      this.resetContexts = false});
 
   String _getUrl() {
     return "https://dialogflow.googleapis.com/v2/projects/${authGoogle.getProjectId}/agent/sessions/${authGoogle.getSessionId}:detectIntent";
   }
 
-
   Future<AIResponse> detectIntent(String query) async {
-
     String queryParams = '{"resetContexts": ${this.resetContexts} }';
 
     if (payload.isNotEmpty) {
-      queryParams = '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
+      queryParams =
+          '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
     }
 
-    String body = '{"queryInput":{"text":{"text":"$query","language_code":"$language"}}, "queryParams": $queryParams}';
+    //String body = '{"queryInput":{"text":{"text":"$query","language_code":"$language"}}, "queryParams": $queryParams}';
+    print('string body section');
+    String body =
+        '{"queryInput":{"event":{"name":"$query","language_code":"$language"}}, "queryParams": $queryParams}';
 
     var response = await authGoogle.post(_getUrl(),
         headers: {
