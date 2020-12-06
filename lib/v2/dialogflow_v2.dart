@@ -124,6 +124,27 @@ class Dialogflow {
     return "https://dialogflow.googleapis.com/v2/projects/${authGoogle.getProjectId}/agent/sessions/${authGoogle.getSessionId}:detectIntent";
   }
 
+  Future<AIResponse> executeEvent(String event, String parameters) async {
+    String queryParams = '{"resetContexts": ${this.resetContexts} }';
+
+    if (payload.isNotEmpty) {
+      queryParams =
+          '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
+    }
+
+    String body =
+        '{"queryInput":{"event":{"name":"$event","parameters": $parameters,"language_code":"en"}}, "queryParams": $queryParams}';
+    print('body string');
+    print(body);
+    var response = await authGoogle.post(_getUrl(),
+        headers: {
+          HttpHeaders.authorizationHeader: "Bearer ${authGoogle.getToken}"
+        },
+        body: body);
+
+    return AIResponse(body: json.decode(response.body));
+  }
+
   Future<AIResponse> detectIntent(String query) async {
     String queryParams = '{"resetContexts": ${this.resetContexts} }';
 
@@ -132,10 +153,8 @@ class Dialogflow {
           '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
     }
 
-    //String body = '{"queryInput":{"text":{"text":"$query","language_code":"$language"}}, "queryParams": $queryParams}';
-    print('string body section');
     String body =
-        '{"queryInput":{"event":{"name":"$query","language_code":"$language"}}, "queryParams": $queryParams}';
+        '{"queryInput":{"text":{"text":"$query","language_code":"$language"}}, "queryParams": $queryParams}';
 
     var response = await authGoogle.post(_getUrl(),
         headers: {
