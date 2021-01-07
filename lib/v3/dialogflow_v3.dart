@@ -133,8 +133,8 @@ class Dialogflow {
     }
 
     String body =
-        '{"queryInput":{"event":{"event":"$event","parameters": $parameters,"language_code":"en"}}, "queryParams": $queryParams}';
-    print('body string');
+        '{"queryInput":{"event":{"event":"$event"},"languageCode": "en"}, "queryParams": $queryParams}';
+    print('body string in the house');
     print(body);
     var response = await authGoogle.post(_getUrl(),
         headers: {
@@ -154,7 +154,7 @@ class Dialogflow {
     }
 
     String body =
-        '{"queryInput":{"text":{"text":"$query","language_code":"$language"}}, "queryParams": $queryParams}';
+        '{"queryInput":{"text":{"text":"$query"},"languageCode": "en"}, "queryParams": $queryParams}';
 
     var response = await authGoogle.post(_getUrl(),
         headers: {
