@@ -30,7 +30,7 @@ class QueryResult {
     fulfillmentText = data["fulfillmentText"];
     intent = data['intent'] != null ? new Intent(data['intent']) : null;
 
-    fulfillmentMessages = data['fulfillmentMessages'];
+    fulfillmentMessages = data['responseMessages'];
   }
 }
 
@@ -134,8 +134,6 @@ class Dialogflow {
 
     String body =
         '{"queryInput":{"event":{"event":"$event"},"languageCode": "en"}, "queryParams": $queryParams}';
-    print('body string in the house');
-    print(body);
     var response = await authGoogle.post(_getUrl(),
         headers: {
           HttpHeaders.authorizationHeader: "Bearer ${authGoogle.getToken}"
