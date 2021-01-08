@@ -17,6 +17,7 @@ class QueryResult {
   String queryText;
   String action;
   Map parameters;
+  List<dynamic> currentPage;
   bool allRequiredParamsPresent;
   String fulfillmentText;
   List<dynamic> fulfillmentMessages;
@@ -26,6 +27,7 @@ class QueryResult {
     queryText = data["queryText"];
     action = data["action"];
     parameters = data["parameters"] ?? null;
+    currentPage = data["currentPage"] ?? null;
     allRequiredParamsPresent = data["allRequiredParamsPresent"];
     fulfillmentText = data["fulfillmentText"];
     intent = data['intent'] != null ? new Intent(data['intent']) : null;
@@ -85,6 +87,10 @@ class AIResponse {
 
   List<dynamic> getListMessage() {
     return _queryResult.fulfillmentMessages;
+  }
+
+  List<dynamic> getPage() {
+    return _queryResult.currentPage;
   }
 
   num get intentDetectionConfidence {
