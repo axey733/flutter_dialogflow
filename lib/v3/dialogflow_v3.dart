@@ -27,7 +27,7 @@ class QueryResult {
     queryText = data["queryText"];
     action = data["action"];
     parameters = data["parameters"] ?? null;
-    currentPage = data["currentPage"];
+    currentPage = data["currentPage"]["displayName"];
     allRequiredParamsPresent = data["allRequiredParamsPresent"];
     fulfillmentText = data["fulfillmentText"];
     intent = data['intent'] != null ? new Intent(data['intent']) : null;
@@ -89,7 +89,7 @@ class AIResponse {
     return _queryResult.fulfillmentMessages;
   }
 
-  List<dynamic> getPage() {
+  String getPage() {
     return _queryResult.currentPage;
   }
 
