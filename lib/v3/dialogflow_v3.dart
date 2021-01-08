@@ -17,7 +17,7 @@ class QueryResult {
   String queryText;
   String action;
   Map parameters;
-  List<dynamic> currentPage;
+  String currentPage;
   bool allRequiredParamsPresent;
   String fulfillmentText;
   List<dynamic> fulfillmentMessages;
@@ -27,7 +27,7 @@ class QueryResult {
     queryText = data["queryText"];
     action = data["action"];
     parameters = data["parameters"] ?? null;
-    currentPage = data["currentPage"] ?? null;
+    currentPage = data["currentPage"];
     allRequiredParamsPresent = data["allRequiredParamsPresent"];
     fulfillmentText = data["fulfillmentText"];
     intent = data['intent'] != null ? new Intent(data['intent']) : null;
