@@ -21,6 +21,7 @@ class QueryResult {
   bool allRequiredParamsPresent;
   String fulfillmentText;
   List<dynamic> fulfillmentMessages;
+  List<dynamic> webhookPayloads;
   Intent intent;
 
   QueryResult(Map data) {
@@ -30,6 +31,7 @@ class QueryResult {
     currentPage = data["currentPage"]["displayName"];
     allRequiredParamsPresent = data["allRequiredParamsPresent"];
     fulfillmentText = data["fulfillmentText"];
+    webhookPayloads = data['webhookPayloads'];
     intent = data['intent'] != null ? new Intent(data['intent']) : null;
 
     fulfillmentMessages = data['responseMessages'];
@@ -83,6 +85,10 @@ class AIResponse {
 
   String getWebhookStatusMessage() {
     return _webhookStatus.message;
+  }
+
+  List<dynamic> getwebhookPayloads() {
+    return _queryResult.webhookPayloads;
   }
 
   List<dynamic> getListMessage() {
