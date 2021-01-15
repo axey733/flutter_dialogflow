@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_dialogflow/v3/auth_google.dart';
 import 'package:meta/meta.dart';
-import "package:flutter/services.dart" as s;
-import "package:yaml/yaml.dart";
 
 class Intent {
   String name;
@@ -169,10 +167,6 @@ class Dialogflow {
     }
 
     if (targetPage.isNotEmpty) {
-      final data = await s.rootBundle.loadString('./config.yaml');
-      final config = loadYaml(data);
-      print("I AM HERE target page!!!!!!");
-      print(config['dialogflow']['pages']['highlights']);
       targetPageUrl =
           '"targetPage": "projects/ai-coach-5a9d5/locations/australia-southeast1/agents/c9489f7d-6d0b-4ad5-97f6-3cc6086659c1/flows/00000000-0000-0000-0000-000000000000/pages/fde758eb-6fce-4ce9-9199-3305c0cc0366",';
     }
