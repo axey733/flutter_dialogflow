@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_dialogflow/v3/auth_google.dart';
 import 'package:meta/meta.dart';
+import "package:flutter/services.dart" as s;
+import "package:yaml/yaml.dart";
 
 class Intent {
   String name;
@@ -124,12 +126,14 @@ class Dialogflow {
   final AuthGoogle authGoogle;
   final String language;
   final String payload;
+  final String targetPage;
   final bool resetContexts;
 
   const Dialogflow(
       {@required this.authGoogle,
       this.language = "en",
       this.payload = "",
+      this.targetPage = "",
       this.resetContexts = false});
 
   String _getUrl() {
@@ -157,14 +161,24 @@ class Dialogflow {
 
   Future<AIResponse> detectIntent(String query) async {
     String queryParams = '{"resetContexts": ${this.resetContexts} }';
+    String targetPageUrl = '';
 
     if (payload.isNotEmpty) {
       queryParams =
           '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
     }
 
+    if (targetPage.isNotEmpty) {
+      final data = await s.rootBundle.loadString('./config.yaml');
+      final config = loadYaml(data);
+      print("I AM HERE target page!!!!!!");
+      print(config['dialogflow']['pages']['highlights']);
+      targetPageUrl =
+          '"targetPage": "projects/ai-coach-5a9d5/locations/australia-southeast1/agents/c9489f7d-6d0b-4ad5-97f6-3cc6086659c1/flows/00000000-0000-0000-0000-000000000000/pages/fde758eb-6fce-4ce9-9199-3305c0cc0366",';
+    }
+
     String body =
-        '{"queryInput":{"text":{"text":"$query"},"languageCode": "en"}, "queryParams": $queryParams}';
+        '{"queryInput":{"text":{"text":"$query"},"languageCode": "en"},$targetPageUrl"queryParams": $queryParams}';
 
     var response = await authGoogle.post(_getUrl(),
         headers: {

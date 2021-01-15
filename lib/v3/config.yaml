@@ -1,0 +1,28 @@
+dialogflow:
+  project: ai-coach-5a9d5
+  location: australia-southeast1
+  agent: c9489f7d-6d0b-4ad5-97f6-3cc6086659c1
+  flows:
+    debrief: 00000000-0000-0000-0000-000000000000
+  pages:
+    start: START_PAGE
+    prework: a668859f-7f45-4b7b-965f-56b2a4b3041d
+    objectives: 7599e321-f562-4fa2-8e3a-2bd2ae82e5c3
+    highlights: 02a2f46b-1b94-4071-a1c8-fb1463bf2115
+    communication: fde758eb-6fce-4ce9-9199-3305c0cc0366
+    support: 497d859a-8ebe-43b0-a7e1-3bcf7d1ac973
+    accuracy: 1b60dea0-0d69-40a6-96d2-3d139d6b730e
+    job_tasks: 366f369e-d471-4540-ab7f-7f7f04fff761
+    ppp: b63f7c77-35e4-40de-84e7-71335bb10fc3
+    balance_prefs: 92bf08bd-4745-4389-9033-6c3e69485104
+    rido: ec1ffaca-371d-42e8-b646-78cac8767ade
+    rido_work: 941ad4a3-7e32-403e-8058-e74a760daf70
+    balance_rido: 00d7dac2-ec7f-4b01-99ca-3946eb83f407
+    communicating_others: 4e12a935-fcb0-4060-aedf-498a6186379b
+    next_steps: 51293839-3d38-4c92-933f-bb15574b404f
+    summary: e5a345c4-a278-4ba7-b381-7ced5e84a3a0
+    end: END_SESSION
+section:
+  prework:
+    doc_pdw: ["https://rise.articulate.com/share/wGC-R7KpLLXIngD9OWnmMM63o1FQ3S5o#/"]
+    doc_321: ["gs://ai-coach-5a9d5.appspot.com/documents/prework/3-2-1.pdf"]
