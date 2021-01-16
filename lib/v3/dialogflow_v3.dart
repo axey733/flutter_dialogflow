@@ -139,12 +139,12 @@ class Dialogflow {
   }
 
   Future<AIResponse> executeEvent(String event, String parameters) async {
-    String queryParams = '{"resetContexts": ${this.resetContexts} }';
-
-    if (payload.isNotEmpty) {
-      queryParams =
-          '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
-    }
+    //String queryParams = '{"resetContexts": ${this.resetContexts} }';
+    String queryParams = '{"parameters": $parameters}';
+    //if (payload.isNotEmpty) {
+    //  queryParams =
+    //      '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
+    //}
 
     String body =
         '{"queryInput":{"event":{"event":"$event"},"languageCode": "en"}, "queryParams": $queryParams}';
