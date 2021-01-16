@@ -145,7 +145,6 @@ class Dialogflow {
     //  queryParams =
     //      '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
     //}
-
     String body =
         '{"queryInput":{"event":{"event":"$event"},"languageCode": "en"}, "queryParams": $queryParams}';
     var response = await authGoogle.post(_getUrl(),
@@ -153,7 +152,10 @@ class Dialogflow {
           HttpHeaders.authorizationHeader: "Bearer ${authGoogle.getToken}"
         },
         body: body);
-
+    print('Dialogflow CX response:');
+    print(response);
+    print('Dialogflow CX response body:');
+    print(body);
     return AIResponse(body: json.decode(response.body));
   }
 
