@@ -161,27 +161,24 @@ class Dialogflow {
 
   Future<AIResponse> detectIntent(String query) async {
     String queryParams = '{"resetContexts": ${this.resetContexts} }';
-    String targetPageUrl = '';
 
     if (payload.isNotEmpty) {
       queryParams =
           '{"resetContexts": ${this.resetContexts}, "payload": $payload}';
     }
 
-    if (targetPage.isNotEmpty) {
-      targetPageUrl =
-          '"targetPage": "projects/ai-coach-5a9d5/locations/australia-southeast1/agents/c9489f7d-6d0b-4ad5-97f6-3cc6086659c1/flows/00000000-0000-0000-0000-000000000000/pages/fde758eb-6fce-4ce9-9199-3305c0cc0366",';
-    }
-
     String body =
-        '{"queryInput":{"text":{"text":"$query"},"languageCode": "en"},$targetPageUrl"queryParams": $queryParams}';
+        '{"queryInput":{"text":{"text":"$query"},"languageCode": "en"},"queryParams": $queryParams}';
 
     var response = await authGoogle.post(_getUrl(),
         headers: {
           HttpHeaders.authorizationHeader: "Bearer ${authGoogle.getToken}"
         },
         body: body);
-
+    print('Dialogflow CX send body:');
+    print(body);
+    print('Dialogflow CX response:');
+    print(response);
     return AIResponse(body: json.decode(response.body));
   }
 }
