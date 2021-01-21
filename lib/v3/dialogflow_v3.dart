@@ -124,14 +124,12 @@ class Dialogflow {
   final AuthGoogle authGoogle;
   final String language;
   final String payload;
-  final String targetPage;
   final bool resetContexts;
 
   const Dialogflow(
       {@required this.authGoogle,
       this.language = "en",
       this.payload = "",
-      this.targetPage = "",
       this.resetContexts = false});
 
   String _getUrl() {
@@ -178,7 +176,7 @@ class Dialogflow {
     print('Dialogflow CX send body:');
     print(body);
     print('Dialogflow CX response:');
-    print(response);
+    print(response.body);
     return AIResponse(body: json.decode(response.body));
   }
 }
